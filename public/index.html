@@ -3,55 +3,129 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="ArcadeForge — 1,200+ original browser game variants with local multiplayer.">
-  <title>ArcadeForge — 1,200+ Browser Games</title>
+  <meta name="description" content="ArcadeForge — a huge instant-play browser arcade with 1,200+ games and local multiplayer.">
+  <meta name="theme-color" content="#070912">
+  <title>ArcadeForge — Play 1,200+ Games</title>
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-  <header class="topbar">
-    <a class="brand" href="/" aria-label="ArcadeForge home"><span class="brand-mark">AF</span><span>ArcadeForge</span></a>
-    <nav class="nav">
-      <a href="#games">Games</a>
-      <a href="#categories">Categories</a>
-      <a href="/proxy.html">Proxy</a>
+  <div class="ambient ambient-a"></div>
+  <div class="ambient ambient-b"></div>
+
+  <header class="site-header">
+    <a class="brand" href="/" aria-label="ArcadeForge home">
+      <span class="brand-mark">AF</span>
+      <span class="brand-copy"><strong>Arcade</strong><b>Forge</b></span>
+    </a>
+
+    <nav class="nav" aria-label="Main navigation">
+      <a class="nav-link active" href="/">Discover</a>
+      <a class="nav-link" href="#games">All games</a>
+      <a class="nav-link" href="#categories">Categories</a>
+      <a class="nav-link" href="/proxy.html">Proxy</a>
     </nav>
-    <button id="themeBtn" class="icon-btn" type="button" aria-label="Toggle theme">◐</button>
+
+    <button id="favoritesBtn" class="header-action" type="button" aria-label="Show favorites">
+      <span>★</span><b>Favorites</b><em id="favoriteCount">0</em>
+    </button>
   </header>
 
-  <main>
-    <section class="hero">
-      <div>
-        <span class="eyebrow">PLAY INSTANTLY · NO DOWNLOADS</span>
-        <h1>1,200+ games.<br><span>One arcade.</span></h1>
-        <p>Original browser game variants, local multiplayer for up to four players, fast search and fullscreen play.</p>
-        <div class="hero-actions"><a class="primary-btn" href="#games">Start playing</a><button id="randomBtn" class="secondary-btn" type="button">Random game</button></div>
+  <main class="page-shell">
+    <section class="featured-hero" id="featuredHero">
+      <div class="hero-glow"></div>
+      <div class="hero-copy">
+        <div class="hero-kicker"><span class="live-dot"></span> FEATURED NOW</div>
+        <h1 id="featuredTitle">Loading featured game…</h1>
+        <p id="featuredMeta">Instant play · No downloads</p>
+        <div class="hero-actions">
+          <a id="featuredPlayBtn" class="play-cta" href="#games"><span class="play-triangle">▶</span> Play now</a>
+          <button id="featuredNextBtn" class="ghost-cta" type="button">Another pick <span>→</span></button>
+        </div>
       </div>
-      <div class="hero-stat-grid">
-        <div class="stat"><strong>1,200</strong><span>Playable games</span></div>
-        <div class="stat"><strong>4</strong><span>Local players</span></div>
-        <div class="stat"><strong>0</strong><span>Downloads</span></div>
-        <div class="stat"><strong>∞</strong><span>Replay value</span></div>
+
+      <div class="featured-art" id="featuredArt" aria-hidden="true">
+        <div class="art-grid"></div>
+        <span class="art-orb orb-a"></span>
+        <span class="art-orb orb-b"></span>
+        <span class="art-orb orb-c"></span>
+        <div class="art-badge"><span id="featuredPlayers">1P</span><small>LOCAL</small></div>
+        <div class="art-score"><span>★</span><strong id="featuredRating">4.9</strong></div>
+      </div>
+
+      <div class="hero-progress">
+        <span></span><span></span><span></span><span></span>
       </div>
     </section>
 
-    <section id="categories" class="section">
-      <div class="section-head"><div><span class="eyebrow">BROWSE</span><h2>Categories</h2></div><button id="clearFilter" class="text-btn" type="button">Clear filter</button></div>
-      <div id="categoryChips" class="chips" aria-label="Game categories"></div>
+    <section class="metric-rail" aria-label="Arcade stats">
+      <div><strong>1,200+</strong><span>games ready to play</span></div>
+      <div><strong>4P</strong><span>local multiplayer</span></div>
+      <div><strong>10</strong><span>game engines</span></div>
+      <div><strong>Instant</strong><span>launch in browser</span></div>
     </section>
 
-    <section id="games" class="section">
-      <div class="section-head search-head">
-        <div><span class="eyebrow">LIBRARY</span><h2 id="gamesHeading">All games</h2></div>
-        <div class="search-wrap"><input id="searchInput" type="search" placeholder="Search 1,200 games…" autocomplete="off"><select id="sortSelect" aria-label="Sort games"><option value="popular">Popular</option><option value="rating">Rating</option><option value="az">A–Z</option><option value="new">Newest</option></select></div>
+    <section class="content-section" id="categories">
+      <div class="section-title-row">
+        <div>
+          <span class="section-kicker">JUMP IN FAST</span>
+          <h2>Pick your vibe</h2>
+        </div>
+        <button id="clearFilter" class="section-link" type="button">Show everything <span>→</span></button>
       </div>
+      <div id="categoryCards" class="category-cards"></div>
+      <div id="categoryChips" class="chips" aria-label="All game categories"></div>
+    </section>
+
+    <section class="content-section">
+      <div class="section-title-row">
+        <div>
+          <span class="section-kicker">HOT RIGHT NOW</span>
+          <h2>Trending games</h2>
+        </div>
+        <button id="randomBtn" class="section-link" type="button">Surprise me <span>↗</span></button>
+      </div>
+      <div id="trendingGrid" class="trending-grid"></div>
+    </section>
+
+    <section id="games" class="content-section library-section">
+      <div class="library-head">
+        <div>
+          <span class="section-kicker">THE FULL ARCADE</span>
+          <h2 id="gamesHeading">All games</h2>
+          <p id="resultCount" class="result-count">1,200 games</p>
+        </div>
+        <div class="library-tools">
+          <label class="search-box">
+            <span>⌕</span>
+            <input id="searchInput" type="search" placeholder="Search games, genres, players…" autocomplete="off" aria-label="Search games">
+            <kbd>/</kbd>
+          </label>
+          <select id="sortSelect" class="sort-select" aria-label="Sort games">
+            <option value="popular">Most played</option>
+            <option value="rating">Top rated</option>
+            <option value="new">Newest</option>
+            <option value="az">A–Z</option>
+          </select>
+        </div>
+      </div>
+
       <div id="gameGrid" class="game-grid"></div>
-      <div id="emptyState" class="empty" hidden><strong>No games found</strong><span>Try another search or category.</span></div>
-      <button id="loadMoreBtn" class="load-more" type="button">Load more games</button>
+      <div id="emptyState" class="empty" hidden>
+        <div class="empty-icon">⌕</div>
+        <strong>No games found</strong>
+        <span>Try a different search or category.</span>
+      </div>
+      <button id="loadMoreBtn" class="load-more" type="button">Load more games <span>↓</span></button>
     </section>
   </main>
 
-  <footer><span>ArcadeForge</span><span>Original self-hosted arcade · 1,200 playable variants</span></footer>
+  <footer class="site-footer">
+    <a class="brand footer-brand" href="/"><span class="brand-mark">AF</span><span class="brand-copy"><strong>Arcade</strong><b>Forge</b></span></a>
+    <p>1,200+ instant browser games. Built for quick play and local multiplayer.</p>
+    <div class="footer-links"><a href="#games">Games</a><a href="#categories">Categories</a><a href="/proxy.html">Proxy</a></div>
+  </footer>
+
   <script type="module" src="/app.js"></script>
 </body>
 </html>
