@@ -7,6 +7,7 @@ import { fileURLToPath } from 'node:url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
 const PORT = Number(process.env.PORT || 3000);
+const HOST = process.env.HOST || '127.0.0.1';
 const MAX_PROXY_BYTES = 2_000_000;
 
 function parseAllowlist(raw = process.env.PROXY_ALLOWLIST || '') {
@@ -52,7 +53,13 @@ app.use((req, res, next) => {
 app.use(express.static(path.join(__dirname, 'public'), { extensions: ['html'] }));
 
 app.get('/api/health', (_req, res) => {
-  res.json({ ok: true, games: 1200, proxyAllowlist: parseAllowlist() });
+  res.json({
+    ok: true,
+    service: 'arcadeforge',
+    games: 1200,
+    uptimeSeconds: Math.floor(process.uptime()),
+    proxyAllowlist: parseAllowlist()
+  });
 });
 
 app.get('/api/proxy', async (req, res) => {
@@ -121,7 +128,18 @@ app.get('/api/proxy', async (req, res) => {
 app.use((_req, res) => res.status(404).sendFile(path.join(__dirname, 'public', '404.html')));
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
-  app.listen(PORT, () => console.log(`ArcadeForge running on http://localhost:${PORT}`));
+  const server = app.listen(PORT, HOST, () => {
+    console.log(`ArcadeForge running on http://${HOST}:${PORT}`);
+  });
+
+  const shutdown = signal => {
+    console.log(`${signal} received, shutting down ArcadeForge...`);
+    server.close(() => process.exit(0));
+    setTimeout(() => process.exit(1), 10_000).unref();
+  };
+
+  process.on('SIGTERM', () => shutdown('SIGTERM'));
+  process.on('SIGINT', () => shutdown('SIGINT'));
 }
 
 export default app;
