@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="ArcadeForge — 1,200+ original browser game variants with local multiplayer.">
+  <title>ArcadeForge — 1,200+ Browser Games</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/" aria-label="ArcadeForge home"><span class="brand-mark">AF</span><span>ArcadeForge</span></a>
+    <nav class="nav">
+      <a href="#games">Games</a>
+      <a href="#categories">Categories</a>
+      <a href="/proxy.html">Proxy</a>
+    </nav>
+    <button id="themeBtn" class="icon-btn" type="button" aria-label="Toggle theme">◐</button>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div>
+        <span class="eyebrow">PLAY INSTANTLY · NO DOWNLOADS</span>
+        <h1>1,200+ games.<br><span>One arcade.</span></h1>
+        <p>Original browser game variants, local multiplayer for up to four players, fast search and fullscreen play.</p>
+        <div class="hero-actions"><a class="primary-btn" href="#games">Start playing</a><button id="randomBtn" class="secondary-btn" type="button">Random game</button></div>
+      </div>
+      <div class="hero-stat-grid">
+        <div class="stat"><strong>1,200</strong><span>Playable games</span></div>
+        <div class="stat"><strong>4</strong><span>Local players</span></div>
+        <div class="stat"><strong>0</strong><span>Downloads</span></div>
+        <div class="stat"><strong>∞</strong><span>Replay value</span></div>
+      </div>
+    </section>
+
+    <section id="categories" class="section">
+      <div class="section-head"><div><span class="eyebrow">BROWSE</span><h2>Categories</h2></div><button id="clearFilter" class="text-btn" type="button">Clear filter</button></div>
+      <div id="categoryChips" class="chips" aria-label="Game categories"></div>
+    </section>
+
+    <section id="games" class="section">
+      <div class="section-head search-head">
+        <div><span class="eyebrow">LIBRARY</span><h2 id="gamesHeading">All games</h2></div>
+        <div class="search-wrap"><input id="searchInput" type="search" placeholder="Search 1,200 games…" autocomplete="off"><select id="sortSelect" aria-label="Sort games"><option value="popular">Popular</option><option value="rating">Rating</option><option value="az">A–Z</option><option value="new">Newest</option></select></div>
+      </div>
+      <div id="gameGrid" class="game-grid"></div>
+      <div id="emptyState" class="empty" hidden><strong>No games found</strong><span>Try another search or category.</span></div>
+      <button id="loadMoreBtn" class="load-more" type="button">Load more games</button>
+    </section>
+  </main>
+
+  <footer><span>ArcadeForge</span><span>Original self-hosted arcade · 1,200 playable variants</span></footer>
+  <script type="module" src="/app.js"></script>
+</body>
+</html>
