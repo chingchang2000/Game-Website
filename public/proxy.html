@@ -1,1 +1,37 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Restricted Proxy · ArcadeForge</title><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="/styles.css"></head><body><header class="topbar"><a class="brand" href="/"><span class="brand-mark">AF</span><span>ArcadeForge</span></a><nav class="nav"><a href="/">Games</a><a href="/#categories">Categories</a><a href="/proxy.html">Proxy</a></nav></header><main class="proxy-page"><span class="eyebrow">RESTRICTED WEB VIEW</span><h1>Proxy</h1><p class="proxy-note">This proxy only loads domains explicitly configured by the server owner. Set <code>PROXY_ALLOWLIST=example.com,docs.example.com</code> before starting the server. Private/local network targets are blocked.</p><form id="proxyForm" class="proxy-toolbar"><input id="proxyUrl" class="proxy-input" type="url" required placeholder="https://allowed-domain.example/page"><button class="primary-btn" type="submit">Open</button><button id="proxyBack" class="secondary-btn" type="button">Back</button><button id="proxyFullscreen" class="secondary-btn" type="button">⛶ Fullscreen</button></form><div id="proxyWrap" class="proxy-frame-wrap"><div class="proxy-empty">Enter an allowlisted URL above.</div><iframe id="proxyFrame" class="proxy-frame" title="Restricted proxied website" sandbox="allow-forms allow-scripts allow-popups allow-modals allow-downloads"></iframe></div></main><script src="/proxy.js"></script></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#070912">
+  <title>Proxy · ArcadeForge</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="/"><span class="brand-mark">AF</span><span class="brand-copy"><strong>Arcade</strong><b>Forge</b></span></a>
+    <nav class="nav"><a class="nav-link" href="/">Discover</a><a class="nav-link" href="/#games">All games</a><a class="nav-link" href="/#categories">Categories</a><a class="nav-link active" href="/proxy.html">Proxy</a></nav>
+  </header>
+  <main class="proxy-page">
+    <div class="proxy-hero">
+      <div>
+        <span class="proxy-pill">WEB VIEW</span>
+        <h1>Open a page</h1>
+        <p class="proxy-note">Enter an allowed web address below. The viewer supports fullscreen and keeps browsing inside the ArcadeForge interface.</p>
+      </div>
+    </div>
+    <form id="proxyForm" class="proxy-toolbar">
+      <input id="proxyUrl" class="proxy-input" type="url" required placeholder="https://example.com">
+      <button class="primary-btn" type="submit">Open</button>
+      <button id="proxyBack" class="secondary-btn" type="button">← Back</button>
+      <button id="proxyFullscreen" class="secondary-btn" type="button">⛶ Fullscreen</button>
+    </form>
+    <div id="proxyWrap" class="proxy-frame-wrap">
+      <div class="proxy-empty">Enter a web address above to begin.</div>
+      <iframe id="proxyFrame" class="proxy-frame" title="Web viewer" sandbox="allow-forms allow-scripts allow-popups allow-modals allow-downloads"></iframe>
+    </div>
+  </main>
+  <script src="/proxy.js"></script>
+</body>
+</html>
