@@ -1,6 +1,6 @@
 {
   "name": "arcadeforge-game-website",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "private": true,
   "type": "module",
   "description": "A self-hosted arcade with 1,200+ original playable game variants and a restricted allowlist web proxy.",
@@ -13,6 +13,6 @@
     "node": ">=20"
   },
   "dependencies": {
-    "express": "^5.1.0"
+    "express": "5.1.0"
   }
 }
