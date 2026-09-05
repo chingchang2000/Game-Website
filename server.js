@@ -8,6 +8,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
 const PORT = Number(process.env.PORT || 3000);
 const HOST = process.env.HOST || '127.0.0.1';
+const SITE_NAME = String(process.env.SITE_NAME || 'ArcadeForge').trim().slice(0, 80) || 'ArcadeForge';
 const MAX_PROXY_BYTES = 2_000_000;
 
 function parseAllowlist(raw = process.env.PROXY_ALLOWLIST || '') {
@@ -50,12 +51,18 @@ app.use((req, res, next) => {
   res.setHeader('Referrer-Policy', 'no-referrer');
   next();
 });
+app.get('/api/config', (_req, res) => {
+  res.setHeader('Cache-Control', 'no-store');
+  res.json({ siteName: SITE_NAME });
+});
+
 app.use(express.static(path.join(__dirname, 'public'), { extensions: ['html'] }));
 
 app.get('/api/health', (_req, res) => {
   res.json({
     ok: true,
     service: 'arcadeforge',
+    siteName: SITE_NAME,
     games: 1200,
     uptimeSeconds: Math.floor(process.uptime()),
     proxyAllowlist: parseAllowlist()
@@ -129,7 +136,7 @@ app.use((_req, res) => res.status(404).sendFile(path.join(__dirname, 'public', '
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   const server = app.listen(PORT, HOST, () => {
-    console.log(`ArcadeForge running on http://${HOST}:${PORT}`);
+    console.log(`${SITE_NAME} running on http://${HOST}:${PORT}`);
   });
 
   const shutdown = signal => {
